@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:padding="12dp"
+    android:background="@drawable/option_item_background"
+    android:layout_marginBottom="8dp">
+
+    <!-- Option Name -->
+    <TextView
+        android:id="@+id/tvOptionName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Extra Cheese"
+        android:textSize="14sp"
+        android:textColor="#333333"
+        android:textStyle="bold"
+        tools:text="Extra Cheese" />
+
+    <!-- Option Price -->
+    <TextView
+        android:id="@+id/tvOptionPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="LKR 200"
+        android:textSize="14sp"
+        android:textColor="#E53E3E"
+        android:textStyle="bold"
+        android:layout_marginEnd="12dp"
+        tools:text="LKR 200" />
+
+    <!-- Remove Button -->
+    <ImageView
+        android:id="@+id/btnRemoveOption"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/ic_close"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:padding="4dp"
+        app:tint="#E53E3E" />
+
+</LinearLayout>

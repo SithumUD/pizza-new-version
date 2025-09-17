@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white"
+    tools:context=".activities.HomeActivity">
+
+    <!-- Top Bar -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/topBar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="#ffcc0000"
+        android:padding="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- App Name -->
+        <TextView
+            android:id="@+id/tvAppName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="The Pizza Mania"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <FrameLayout
+            android:id="@+id/btncart"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/chip_bg"
+            android:backgroundTint="#F46076"
+            android:padding="6dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/btnprofile"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/ivCart"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/carticon"
+                app:tint="@android:color/white" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/btnprofile"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/chip_bg"
+            android:backgroundTint="#F46076"
+            android:padding="6dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/ivProfile"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/profileicon"
+                app:tint="@android:color/white" />
+        </FrameLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+    <!-- Categories RecyclerView -->
+    <HorizontalScrollView
+        android:id="@+id/horizontalScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:scrollbars="none"
+        app:layout_constraintTop_toBottomOf="@+id/topBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!-- Category Buttons -->
+            <Button
+                android:id="@+id/btnAll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="All"
+                android:backgroundTint="#F1F2F4"
+                android:textColor="@color/black"
+                android:paddingStart="24dp"
+                android:paddingEnd="24dp"
+                android:textAllCaps="false"
+                app:cornerRadius="16dp" />
+
+            <Button
+                android:id="@+id/btnClassic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="Classic"
+                android:backgroundTint="#F1F2F4"
+                android:textColor="@color/black"
+                android:paddingStart="24dp"
+                android:paddingEnd="24dp"
+                android:textAllCaps="false"
+                app:cornerRadius="16dp" />
+
+            <Button
+                android:id="@+id/btnSpicy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="Spicy"
+                android:backgroundTint="#F1F2F4"
+                android:textColor="@color/black"
+                android:paddingStart="24dp"
+                android:paddingEnd="24dp"
+                android:textAllCaps="false"
+                app:cornerRadius="16dp" />
+
+            <Button
+                android:id="@+id/btnDesserts"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="Desserts"
+                android:backgroundTint="#F1F2F4"
+                android:textColor="@color/black"
+                android:paddingStart="24dp"
+                android:paddingEnd="24dp"
+                android:textAllCaps="false"
+                app:cornerRadius="16dp" />
+
+            <Button
+                android:id="@+id/btnDrinks"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="Drinks"
+                android:backgroundTint="#F1F2F4"
+                android:textColor="@color/black"
+                android:textAllCaps="false"
+                android:paddingStart="24dp"
+                android:paddingEnd="24dp"
+                app:cornerRadius="16dp" />
+
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <!-- Food RecyclerView -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvFood"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:padding="8dp"
+        android:layout_marginTop="16dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView" />
+</androidx.constraintlayout.widget.ConstraintLayout>

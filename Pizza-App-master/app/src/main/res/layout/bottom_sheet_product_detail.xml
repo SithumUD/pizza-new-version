@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/bottom_sheet_background"
+    android:padding="20dp">
+
+    <!-- Handle -->
+    <View
+        android:layout_width="40dp"
+        android:layout_height="4dp"
+        android:background="@drawable/bottom_sheet_handle"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="20dp" />
+
+    <!-- Close Button -->
+    <ImageView
+        android:id="@+id/btnClose"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/ic_close"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:layout_gravity="end"
+        android:layout_marginBottom="16dp"
+        app:tint="#999999" />
+
+    <!-- Product Info -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="20dp">
+
+        <!-- Product Image -->
+        <ImageView
+            android:id="@+id/ivProductImage"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:scaleType="centerCrop"
+            android:background="@drawable/rounded_image_bg"
+            android:layout_marginEnd="16dp"
+            tools:src="@drawable/pizza" />
+
+        <!-- Product Details -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <!-- Product Name -->
+            <TextView
+                android:id="@+id/tvProductName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Margherita"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="#333333"
+                android:layout_marginBottom="4dp"
+                tools:text="Margherita" />
+
+            <!-- Product Description -->
+            <TextView
+                android:id="@+id/tvProductDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Fresh tomatoes, mozzarella, basil"
+                android:textSize="14sp"
+                android:textColor="#666666"
+                android:layout_marginBottom="8dp"
+                tools:text="Fresh tomatoes, mozzarella, basil" />
+
+            <!-- Price and Category -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/tvProductPrice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="LKR 1,200"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="#E53E3E"
+                    android:layout_marginEnd="12dp"
+                    tools:text="LKR 1,200" />
+
+                <TextView
+                    android:id="@+id/tvProductCategory"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Classic"
+                    android:textSize="12sp"
+                    android:textColor="#666666"
+                    android:background="@drawable/category_tag_background"
+                    android:paddingHorizontal="8dp"
+                    android:paddingVertical="4dp"
+                    android:layout_marginEnd="8dp"
+                    tools:text="Classic" />
+
+                <!-- Status -->
+                <TextView
+                    android:id="@+id/tvProductStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Available"
+                    android:textSize="12sp"
+                    android:textColor="#48BB78"
+                    android:textStyle="bold"
+                    tools:text="Available" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- Customization Options -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Customization Options"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:textColor="#333333"
+        android:layout_marginBottom="12dp" />
+
+    <!-- Options List -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvCustomizationOptions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:nestedScrollingEnabled="false"
+        tools:listitem="@layout/item_customization_option_display" />
+
+    <!-- Action Buttons -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/btnMarkUnavailable"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Mark Unavailable"
+            android:textColor="#E53E3E"
+            android:background="@drawable/unavailable_button_background"
+            android:layout_marginEnd="8dp"
+            android:paddingVertical="12dp" />
+
+        <Button
+            android:id="@+id/btnEditProduct"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Edit Product"
+            android:textColor="@android:color/white"
+            android:background="@drawable/edit_button_background"
+            android:layout_marginStart="8dp"
+            android:paddingVertical="12dp" />
+
+        <ImageView
+            android:id="@+id/btnDeleteProduct"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/deleteicon"
+            android:background="@drawable/delete_button_background"
+            android:padding="12dp"
+            android:layout_marginStart="8dp"
+            app:tint="@android:color/white" />
+
+    </LinearLayout>
+
+</LinearLayout>

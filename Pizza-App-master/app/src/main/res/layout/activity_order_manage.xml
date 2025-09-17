@@ -1,0 +1,694 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F5F5"
+    tools:context=".activities.admin.OrderManageActivity">
+
+    <!-- Header Section -->
+    <LinearLayout
+        android:id="@+id/headerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#E53E3E"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <!-- Header Content -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="16dp">
+
+            <ImageView
+                android:id="@+id/backButton"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/backicon"
+                app:tint="@android:color/white"
+                android:contentDescription="Back" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Order Management"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginStart="16dp" />
+
+        </LinearLayout>
+
+        <!-- Filter Tabs -->
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none"
+            android:background="@color/white"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="10dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/tabAll"
+                    android:layout_width="wrap_content"
+                    android:layout_height="32dp"
+                    android:text="All"
+                    android:textColor="@android:color/white"
+                    android:textSize="14sp"
+                    android:gravity="center"
+                    android:paddingHorizontal="16dp"
+                    android:background="@drawable/chip_bg"
+                    android:layout_marginEnd="8dp" />
+
+                <TextView
+                    android:id="@+id/tabPending"
+                    android:layout_width="wrap_content"
+                    android:layout_height="32dp"
+                    android:text="Pending"
+                    android:textSize="14sp"
+                    android:gravity="center"
+                    android:paddingHorizontal="16dp"
+                    android:layout_marginEnd="8dp" />
+
+                <TextView
+                    android:id="@+id/tabPreparing"
+                    android:layout_width="wrap_content"
+                    android:layout_height="32dp"
+                    android:text="Preparing"
+                    android:textSize="14sp"
+                    android:gravity="center"
+                    android:paddingHorizontal="16dp"
+                    android:layout_marginEnd="8dp" />
+
+                <TextView
+                    android:id="@+id/tabInTransit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="32dp"
+                    android:text="In Transit"
+                    android:textSize="14sp"
+                    android:gravity="center"
+                    android:paddingHorizontal="16dp"
+                    android:layout_marginEnd="8dp" />
+
+                <TextView
+                    android:id="@+id/tabDelivered"
+                    android:layout_width="wrap_content"
+                    android:layout_height="32dp"
+                    android:text="Delivered"
+                    android:textSize="14sp"
+                    android:gravity="center"
+                    android:paddingHorizontal="16dp" />
+
+            </LinearLayout>
+        </HorizontalScrollView>
+
+    </LinearLayout>
+
+    <!-- Orders List -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/ordersRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:paddingHorizontal="16dp"
+        android:paddingTop="16dp"
+        android:clipToPadding="false"
+        app:layout_constraintTop_toBottomOf="@id/headerLayout"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:listitem="@layout/item_order" />
+
+    <!-- Order Detail Modal Overlay -->
+    <FrameLayout
+        android:id="@+id/orderDetailOverlay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#80000000"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_margin="16dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="8dp">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxHeight="600dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@color/white"
+                    android:padding="20dp">
+
+                    <!-- Header with close button -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="16dp">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:gravity="center_vertical">
+
+                                <TextView
+                                    android:id="@+id/orderIdText"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Order PM-4888"
+                                    android:textSize="16sp"
+                                    android:textStyle="bold"
+                                    android:textColor="#000000" />
+
+                                <TextView
+                                    android:id="@+id/orderStatusBadge"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Cancelled"
+                                    android:textSize="12sp"
+                                    android:textColor="#E53E3E"
+                                    android:paddingHorizontal="8dp"
+                                    android:paddingVertical="4dp"
+                                    android:layout_marginStart="8dp" />
+
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/orderTimeText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Yesterday, 7:15 PM"
+                                android:textSize="14sp"
+                                android:textColor="#666666"
+                                android:layout_marginTop="2dp" />
+
+                        </LinearLayout>
+
+                        <ImageView
+                            android:id="@+id/closeButton"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/closeicon"
+                            app:tint="#666666"
+                            android:contentDescription="Close"
+                            android:background="?attr/selectableItemBackgroundBorderless" />
+
+                    </LinearLayout>
+
+                    <!-- Customer Information -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Customer Information"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="#000000"
+                        android:layout_marginBottom="12dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp"
+                        android:layout_marginBottom="20dp">
+
+                        <TextView
+                            android:id="@+id/customerNameText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Raj Patel"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:textColor="#000000" />
+
+                        <TextView
+                            android:id="@+id/customerAddressText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="34 Beach Road, Negombo"
+                            android:textSize="14sp"
+                            android:textColor="#666666"
+                            android:layout_marginTop="4dp" />
+
+                        <TextView
+                            android:id="@+id/customerPhoneText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="+94 74 678 9012"
+                            android:textSize="14sp"
+                            android:textColor="#666666"
+                            android:layout_marginTop="2dp" />
+
+                    </LinearLayout>
+
+                    <!-- Order Details -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Order Details"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="#000000"
+                        android:layout_marginBottom="12dp" />
+
+                    <!-- Order Items List -->
+                    <LinearLayout
+                        android:id="@+id/orderItemsContainer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginBottom="16dp">
+
+                        <!-- Sample Order Item 1 -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:paddingVertical="8dp">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Pepperoni Feast"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold"
+                                    android:textColor="#000000" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Quantity: 1"
+                                    android:textSize="12sp"
+                                    android:textColor="#666666"
+                                    android:layout_marginTop="2dp" />
+
+                            </LinearLayout>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="LKR 1,700"
+                                android:textSize="14sp"
+                                android:textStyle="bold"
+                                android:textColor="#E53E3E" />
+
+                        </LinearLayout>
+
+                        <!-- Sample Order Item 2 -->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:paddingVertical="8dp">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Spicy Chicken"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold"
+                                    android:textColor="#000000" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Quantity: 1"
+                                    android:textSize="12sp"
+                                    android:textColor="#666666"
+                                    android:layout_marginTop="2dp" />
+
+                            </LinearLayout>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="LKR 1,600"
+                                android:textSize="14sp"
+                                android:textStyle="bold"
+                                android:textColor="#E53E3E" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <!-- Total -->
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="#E0E0E0"
+                        android:layout_marginVertical="8dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:layout_marginBottom="20dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="Total"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:textColor="#000000" />
+
+                        <TextView
+                            android:id="@+id/totalAmountText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="LKR 3,700"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:textColor="#E53E3E" />
+
+                    </LinearLayout>
+
+                    <!-- Order Information Grid -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="16dp">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Branch"
+                                android:textSize="14sp"
+                                android:textStyle="bold"
+                                android:textColor="#000000"
+                                android:layout_marginBottom="4dp" />
+
+                            <TextView
+                                android:id="@+id/branchText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Negombo Beach"
+                                android:textSize="14sp"
+                                android:textColor="#666666" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Payment Method"
+                                android:textSize="14sp"
+                                android:textStyle="bold"
+                                android:textColor="#000000"
+                                android:layout_marginBottom="4dp" />
+
+                            <TextView
+                                android:id="@+id/paymentMethodText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Cash on Delivery"
+                                android:textSize="14sp"
+                                android:textColor="#666666" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="20dp">
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Driver"
+                                android:textSize="14sp"
+                                android:textStyle="bold"
+                                android:textColor="#000000"
+                                android:layout_marginBottom="4dp" />
+
+                            <TextView
+                                android:id="@+id/driverText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="N/A"
+                                android:textSize="14sp"
+                                android:textColor="#666666" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Delivery Status"
+                                android:textSize="14sp"
+                                android:textStyle="bold"
+                                android:textColor="#000000"
+                                android:layout_marginBottom="4dp" />
+
+                            <TextView
+                                android:id="@+id/deliveryStatusText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Cancelled"
+                                android:textSize="14sp"
+                                android:textColor="#E53E3E" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <!-- Location Tracking (when in transit) -->
+                    <LinearLayout
+                        android:id="@+id/locationTrackingSection"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="gone"
+                        android:layout_marginBottom="20dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Delivery Location"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:textColor="#000000"
+                            android:layout_marginBottom="12dp" />
+
+                        <!-- Placeholder for location visual -->
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="100dp"
+                            android:background="#F0F0F0"
+                            android:layout_marginBottom="16dp">
+
+                        </FrameLayout>
+
+                    </LinearLayout>
+
+                    <!-- Driver Assignment Section (for preparing orders) -->
+                    <LinearLayout
+                        android:id="@+id/driverAssignmentSection"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="gone"
+                        android:layout_marginBottom="20dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Select Delivery Driver"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:textColor="#000000"
+                            android:layout_marginBottom="12dp" />
+
+                        <Spinner
+                            android:id="@+id/driverSpinner"
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:layout_marginBottom="16dp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center">
+
+                            <Button
+                                android:id="@+id/cancelAssignmentButton"
+                                style="@style/Widget.AppCompat.Button.Borderless"
+                                android:layout_width="0dp"
+                                android:layout_height="48dp"
+                                android:layout_weight="1"
+                                android:text="Cancel"
+                                android:textColor="#E53E3E"
+                                android:textStyle="bold"
+                                android:background="@drawable/chip_bg"
+                                android:layout_marginEnd="8dp" />
+
+                            <Button
+                                android:id="@+id/assignDriverButton"
+                                android:layout_width="0dp"
+                                android:layout_height="48dp"
+                                android:layout_weight="1"
+                                android:text="Assign &amp; Send"
+                                android:textColor="@android:color/white"
+                                android:textStyle="bold"
+                                android:background="@drawable/chip_bg"
+                                android:layout_marginStart="8dp" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <!-- Action Buttons -->
+                    <LinearLayout
+                        android:id="@+id/actionButtonsContainer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <!-- Primary Action Button -->
+                        <Button
+                            android:id="@+id/primaryActionButton"
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:text="Close"
+                            android:textColor="@android:color/white"
+                            android:textStyle="bold"
+                            android:background="@drawable/chip_bg"
+                            android:layout_marginBottom="12dp" />
+
+                        <!-- Secondary Action Buttons (for specific states) -->
+                        <LinearLayout
+                            android:id="@+id/secondaryActionsLayout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:visibility="gone">
+
+                            <Button
+                                android:id="@+id/startPreparingButton"
+                                android:layout_width="0dp"
+                                android:layout_height="48dp"
+                                android:layout_weight="1"
+                                android:text="Start Preparing"
+                                android:textColor="@android:color/white"
+                                android:textStyle="bold"
+                                android:background="@drawable/chip_bg"
+                                android:layout_marginEnd="8dp" />
+
+                            <Button
+                                android:id="@+id/cancelOrderButton"
+                                android:layout_width="0dp"
+                                android:layout_height="48dp"
+                                android:layout_weight="1"
+                                android:text="Cancel Order"
+                                android:textColor="@android:color/white"
+                                android:textStyle="bold"
+                                android:background="@drawable/chip_bg"
+                                android:layout_marginStart="8dp" />
+
+                        </LinearLayout>
+
+                        <!-- Mark as Delivered Button -->
+                        <Button
+                            android:id="@+id/markDeliveredButton"
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:text="Mark as Delivered"
+                            android:textColor="@android:color/white"
+                            android:textStyle="bold"
+                            android:background="@drawable/chip_bg"
+                            android:visibility="gone" />
+
+                        <!-- Send for Delivery Button -->
+                        <Button
+                            android:id="@+id/sendForDeliveryButton"
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:text="Send for Delivery"
+                            android:textColor="@android:color/white"
+                            android:textStyle="bold"
+                            android:background="@drawable/chip_bg"
+                            android:visibility="gone" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </ScrollView>
+
+        </androidx.cardview.widget.CardView>
+
+    </FrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
